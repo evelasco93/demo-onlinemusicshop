@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const SLIDES = [
@@ -83,6 +83,7 @@ const SLIDES = [
 export default function HeroSection() {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1);
+  const touchStartX = useRef<number | null>(null);
 
   const go = useCallback((next: number, dir: 1 | -1) => {
     setDirection(dir);
@@ -94,6 +95,19 @@ export default function HeroSection() {
     return () => clearInterval(timer);
   }, [current, go]);
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
+      go(current + (diff > 0 ? 1 : -1), diff > 0 ? 1 : -1);
+    }
+    touchStartX.current = null;
+  };
+
   const slide = SLIDES[current];
 
   const variants = {
@@ -104,8 +118,10 @@ export default function HeroSection() {
 
   return (
     <section
-      className="relative overflow-hidden min-h-[380px] sm:min-h-[460px] md:min-h-[620px]"
+      className="relative overflow-hidden h-[480px] sm:h-[520px] md:h-[620px]"
       style={{ background: slide.bg }}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       {/* Animated background transition */}
       <AnimatePresence mode="sync">
@@ -160,7 +176,7 @@ export default function HeroSection() {
           animate="center"
           exit="exit"
           transition={{ duration: 0.45, ease: "easeInOut" }}
-          className="relative max-w-7xl mx-auto px-12 sm:px-10 md:px-6 lg:px-8 w-full py-10 sm:py-12 md:py-20 flex items-center min-h-[380px] sm:min-h-[460px] md:min-h-[620px]"
+          className="absolute inset-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center"
         >
           <div className="grid sm:grid-cols-2 gap-6 items-center w-full">
             {/* Left: Text */}
@@ -267,7 +283,7 @@ export default function HeroSection() {
       {/* Prev / Next arrows */}
       <button
         onClick={() => go(current - 1, -1)}
-        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 hover:bg-white/25 border border-white/20 rounded-full flex items-center justify-center text-white transition-all backdrop-blur-sm z-10"
+        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 hover:bg-white/25 border border-white/20 rounded-full hidden sm:flex items-center justify-center text-white transition-all backdrop-blur-sm z-10"
         aria-label="Anterior"
       >
         <svg
@@ -286,7 +302,7 @@ export default function HeroSection() {
       </button>
       <button
         onClick={() => go(current + 1, 1)}
-        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 hover:bg-white/25 border border-white/20 rounded-full flex items-center justify-center text-white transition-all backdrop-blur-sm z-10"
+        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 hover:bg-white/25 border border-white/20 rounded-full hidden sm:flex items-center justify-center text-white transition-all backdrop-blur-sm z-10"
         aria-label="Siguiente"
       >
         <svg

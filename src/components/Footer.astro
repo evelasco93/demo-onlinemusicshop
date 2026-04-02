@@ -1,10 +1,10 @@
 ---
 ---
-<footer style="background-color: #1A1A1A;" class="text-white pt-14 pb-6">
+<footer style="background-color: #1A1A1A;" class="text-white pt-4 sm:pt-14 pb-6">
   <div class="w-full px-6 sm:px-10 lg:px-16 xl:px-24">
 
-    <!-- Main grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-10 lg:gap-16 pb-12 border-b border-white/10">
+    <!-- Main grid — hidden on mobile, visible from sm up -->
+    <div class="hidden sm:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-10 lg:gap-16 pb-12 border-b border-white/10">
 
       <!-- Brand col -->
       <div class="lg:col-span-2">
@@ -122,13 +122,13 @@
 
     <!-- Bottom bar -->
     <div class="mt-8 pt-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/30">
-      <div class="flex flex-wrap gap-5">
+      <div class="hidden sm:flex flex-wrap gap-5">
         <a href="#" class="hover:text-white/60 transition-colors">Términos de Uso</a>
         <a href="#" class="hover:text-white/60 transition-colors">Privacidad</a>
         <a href="#" class="hover:text-white/60 transition-colors">Cookies</a>
         <a href="#" class="hover:text-white/60 transition-colors">Accesibilidad</a>
       </div>
-      <p>© 2026 Online Music Shop. Todos los derechos reservados. Hillside Mall, C. La Mascota 520, San Salvador.</p>
+      <p class="text-center sm:text-right">© 2026 Online Music Shop. Todos los derechos reservados.</p>
     </div>
   </div>
 </footer>

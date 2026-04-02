@@ -628,14 +628,42 @@ export default function Navbar() {
             >
               <div className="px-4 py-3">
                 {/* Mobile search */}
-                <div className="relative mb-4">
+                <div className="relative mb-4 flex gap-2">
                   <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && searchQuery.trim()) {
+                        window.location.href = `/categorias?q=${encodeURIComponent(searchQuery.trim())}`;
+                      }
+                    }}
                     placeholder="Buscar productos..."
-                    className="w-full bg-white/10 text-white placeholder-white/50 border border-white/20 rounded-full px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange"
+                    className="flex-1 bg-white/10 text-white placeholder-white/50 border border-white/20 rounded-full px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange"
                   />
+                  <button
+                    onClick={() => {
+                      if (searchQuery.trim()) {
+                        window.location.href = `/categorias?q=${encodeURIComponent(searchQuery.trim())}`;
+                      }
+                    }}
+                    className="bg-brand-orange text-white rounded-full w-10 h-10 flex items-center justify-center shrink-0"
+                    aria-label="Buscar"
+                  >
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                      />
+                    </svg>
+                  </button>
                 </div>
 
                 {/* Categories section */}
