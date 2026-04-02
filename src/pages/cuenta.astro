@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AccountDashboard from '../components/AccountDashboard';
+---
+
+<Layout title="Mi Cuenta — Online Music Shop">
+  <main class="min-h-screen bg-ui-50 py-8">
+    <AccountDashboard client:load />
+  </main>
+</Layout>

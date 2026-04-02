@@ -1,0 +1,43 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { categorias } from '../../data/productos';
+import AllProductsCatalog from '../../components/AllProductsCatalog';
+---
+
+<Layout title="Catálogo — Online Music Shop" description="Explora nuestro catálogo completo de guitarras, pedales y amplificadores.">
+  <section class="py-12 bg-ui-50 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Header -->
+      <div class="mb-10">
+        <nav class="flex items-center gap-2 text-xs text-ui-400 mb-4">
+          <a href="/" class="hover:text-brand-orange transition-colors">Inicio</a>
+          <span>/</span>
+          <span class="text-neutral-dark font-medium">Catálogo</span>
+        </nav>
+        <h1 class="font-heading text-5xl text-neutral-dark uppercase">Nuestro Catálogo</h1>
+        <p class="text-ui-400 mt-2 text-lg">
+          {categorias.reduce((acc, cat) => acc + cat.items.length, 0)} productos disponibles en {categorias.length} categorías
+        </p>
+      </div>
+
+      <!-- React catalog: handles brand filter from URL or shows category overview -->
+      <AllProductsCatalog
+        categories={categorias.map(c => ({
+          id: c.id,
+          nombre: c.nombre,
+          descripcion: c.descripcion,
+          items: c.items.map(i => ({
+            id: i.id,
+            nombre: i.nombre,
+            marca: i.marca,
+            precio: i.precio,
+            imagen: i.imagenes[0] ?? '',
+          })),
+        }))}
+        client:load
+      />
+
+    </div>
+  </section>
+</Layout>

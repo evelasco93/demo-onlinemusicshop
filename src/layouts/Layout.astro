@@ -1,0 +1,58 @@
+---
+import '../styles/global.css';
+import { ViewTransitions } from 'astro:transitions';
+import Navbar from '../components/Navbar';
+import CartDrawer from '../components/CartDrawer';
+import SearchModal from '../components/SearchModal';
+import Footer from '../components/Footer.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = 'Online Music Shop — Guitarras, Pedales y Amplificadores',
+  description = 'Tu tienda online de instrumentos musicales. Guitarras, pedales de efectos y amplificadores de las mejores marcas.',
+  image = '/logo.png',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta name="theme-color" content="#2E144F" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <ViewTransitions />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen flex flex-col bg-white font-body">
+    <!-- Global Navbar (React island) -->
+    <Navbar client:load />
+
+    <!-- Cart Drawer (React island) -->
+    <CartDrawer client:load />
+
+    <!-- Search Modal (React island) -->
+    <SearchModal client:load />
+
+    <!-- Page Content -->
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <Footer />
+
+    <!-- WhatsApp Float -->
+    <WhatsAppFloat client:load />
+  </body>
+</html>

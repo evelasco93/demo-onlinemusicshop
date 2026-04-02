@@ -1,0 +1,186 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NewsletterBanner from '../components/NewsletterBanner';
+---
+
+<Layout
+  title="Sobre Nosotros — Online Music Shop"
+  description="Somos tu tienda online de instrumentos musicales. Conoce nuestra misión, visión y el equipo detrás de Online Music Shop."
+>
+  <!-- Hero Banner -->
+  <section
+    style="background: linear-gradient(135deg, #2E144F 0%, #1a0c30 100%);"
+    class="relative py-20 overflow-hidden"
+  >
+    <div class="absolute inset-0 opacity-5">
+      <svg width="100%" height="100%">
+        <defs>
+          <pattern id="grid2" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="1" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid2)" />
+      </svg>
+    </div>
+    <div class="absolute right-0 top-0 w-96 h-96 bg-brand-orange/10 rounded-full blur-3xl" />
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <span class="inline-flex items-center gap-2 bg-brand-orange/20 border border-brand-orange/40 text-brand-orange text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider mb-5">
+        Nuestra Historia
+      </span>
+      <h1 class="font-heading text-5xl md:text-7xl text-white uppercase leading-tight">
+        Sobre <span class="text-brand-orange">Nosotros</span>
+      </h1>
+      <p class="text-white/60 mt-4 text-xl max-w-2xl mx-auto leading-relaxed">
+        Somos músicos que entienden lo que necesitan los músicos. Nació de la pasión por la música y el compromiso de poner el mejor equipo en tus manos.
+      </p>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="py-16 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Vision -->
+        <div
+          class="rounded-2xl p-8 relative overflow-hidden animate-fade-in"
+          style="background: linear-gradient(135deg, #2E144F 0%, #1a0c30 100%);"
+        >
+          <div class="absolute top-0 right-0 w-32 h-32 bg-brand-yellow/10 rounded-full blur-2xl" />
+          <div class="relative">
+            <div class="w-12 h-12 bg-brand-yellow/20 rounded-xl flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-brand-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+            </div>
+            <h2 class="font-heading text-3xl text-brand-yellow uppercase mb-3">Visión</h2>
+            <p class="text-white/80 leading-relaxed text-base">
+              Ser la empresa en línea más reconocida a nivel nacional de instrumentos musicales, comprometida con sus clientes para brindar productos de las mejores y más prestigiosas marcas internacionales, siendo reconocidos por brindar la mejor experiencia de compra existente en el mercado.
+            </p>
+          </div>
+        </div>
+
+        <!-- Mission -->
+        <div
+          class="rounded-2xl p-8 relative overflow-hidden border-2 animate-fade-in"
+          style="border-color: #F77021; background: linear-gradient(135deg, #FFF7F3 0%, #FFF 100%);"
+        >
+          <div class="absolute bottom-0 right-0 w-32 h-32 bg-brand-orange/10 rounded-full blur-2xl" />
+          <div class="relative">
+            <div class="w-12 h-12 bg-brand-orange/20 rounded-xl flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h2 class="font-heading text-3xl text-brand-orange uppercase mb-3">Misión</h2>
+            <p class="text-neutral-dark/80 leading-relaxed text-base">
+              Somos una empresa innovadora dedicada al comercio de instrumentos y accesorios musicales de prestigiosas marcas en la industria, ofreciendo la mejor calidad a nuestros músicos con el fin de hacer crecer el talento y amor por la música.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="py-16 bg-ui-50">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="font-heading text-4xl text-neutral-dark uppercase">Nuestros Valores</h2>
+        <p class="text-ui-400 mt-2">Lo que nos impulsa cada día</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {[
+          { icon: '🎸', title: 'Pasión por la Música', desc: 'Somos músicos que entienden lo que necesitas' },
+          { icon: '✅', title: 'Calidad Garantizada', desc: 'Solo trabajamos con marcas reconocidas mundialmente' },
+          { icon: '💬', title: 'Servicio Excepcional', desc: 'Tu satisfacción es nuestra prioridad' },
+          { icon: '🚀', title: 'Innovación Constante', desc: 'Siempre a la vanguardia del mercado musical' },
+        ].map(v => (
+          <div class="bg-white rounded-2xl border border-ui-100 p-6 text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+            <div class="text-4xl mb-3">{v.icon}</div>
+            <h3 class="font-heading text-base text-neutral-dark uppercase mb-2">{v.title}</h3>
+            <p class="text-ui-400 text-sm">{v.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Story / About content -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="font-heading text-3xl text-neutral-dark uppercase mb-4">Nuestra Historia</h2>
+          <div class="space-y-4 text-neutral-dark/80 text-base leading-relaxed">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+            <p>
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <p>
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+            </p>
+          </div>
+        </div>
+        <div class="rounded-2xl overflow-hidden border border-ui-100" style="min-height: 280px;">
+          <img src="/showroom.png" alt="Showroom Online Music Shop" class="w-full h-full object-cover" style="min-height: 280px;" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team (mock) -->
+  <section class="py-16 bg-ui-50">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="font-heading text-4xl text-neutral-dark uppercase">Nuestro Equipo</h2>
+        <p class="text-ui-400 mt-2">Los apasionados detrás de la tienda</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {[
+          { nombre: 'Kevin Luna', rol: 'Fundador & CEO', emoji: '🎸' },
+          { nombre: 'Ana López', rol: 'Directora de Ventas', emoji: '🎹' },
+          { nombre: 'Diego Herrera', rol: 'Especialista Técnico', emoji: '🎛️' },
+        ].map(m => (
+          <div class="bg-white rounded-2xl border border-ui-100 p-6 text-center hover:shadow-md transition-shadow">
+            <div
+              class="w-16 h-16 rounded-full flex items-center justify-center text-3xl mx-auto mb-3"
+              style="background: linear-gradient(135deg, #2E144F20, #F7702120);"
+            >
+              {m.emoji}
+            </div>
+            <h3 class="font-heading text-lg text-neutral-dark uppercase">{m.nombre}</h3>
+            <p class="text-ui-400 text-sm mt-0.5">{m.rol}</p>
+            <p class="text-ui-400 text-xs mt-2">
+              Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section style="background: #2E144F;" class="py-12">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+        {[
+          { value: '500+', label: 'Clientes satisfechos' },
+          { value: '10+', label: 'Marcas premium' },
+          { value: '3', label: 'Años de experiencia' },
+          { value: '100%', label: 'Entrega segura' },
+        ].map(s => (
+          <div>
+            <p class="font-heading text-4xl text-brand-orange font-bold">{s.value}</p>
+            <p class="text-white/50 text-sm mt-1">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <NewsletterBanner client:visible />
+</Layout>

@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProductDetail from '../../components/ProductDetail';
+import FeaturedProducts from '../../components/FeaturedProducts';
+import { getAllProductos, getProductoById, getCategoriaById } from '../../data/productos';
+import type { Producto } from '../../data/productos';
+
+export function getStaticPaths() {
+  return getAllProductos().map((p) => ({
+    params: { id: p.id },
+    props: { producto: p },
+  }));
+}
+
+const { producto } = Astro.props;
+const allProductos = getAllProductos();
+
+// Use explicit relacionados list if available, otherwise fall back to same-category
+const relacionados = producto.relacionados && producto.relacionados.length > 0
+  ? producto.relacionados
+      .map((rid) => getProductoById(rid))
+      .filter((p): p is Producto => p !== undefined)
+      .slice(0, 4)
+  : (getCategoriaById(producto.categoria)?.items || [])
+      .filter((p) => p.id !== producto.id)
+      .slice(0, 4);
+---
+
+<Layout
+  title={`${producto.nombre} — Online Music Shop`}
+  description={producto.descripcion}
+  image={producto.imagenes[0]}
+>
+  <ProductDetail client:load producto={producto} />
+
+  {relacionados.length > 0 && (
+    <section class="pb-16 bg-ui-50 border-t border-ui-100">
+      <FeaturedProducts
+        client:visible
+        title="Los clientes que compraron esto también compraron"
+        subtitle="Productos relacionados que podrían interesarte"
+        productos={relacionados}
+        showViewAll={true}
+        viewAllHref={`/categorias/${producto.categoria}`}
+      />
+    </section>
+  )}
+</Layout>

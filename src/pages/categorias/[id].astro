@@ -1,0 +1,64 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CategoryProductGrid from '../../components/CategoryProductGrid';
+import { categorias, getCategoriaById } from '../../data/productos';
+
+export function getStaticPaths() {
+  return categorias.map((cat) => ({
+    params: { id: cat.id },
+    props: { categoria: cat },
+  }));
+}
+
+const { categoria } = Astro.props;
+---
+
+<Layout
+  title={`${categoria.nombre} — Online Music Shop`}
+  description={`Explora nuestra selección de ${categoria.nombre.toLowerCase()}. ${categoria.descripcion}`}
+>
+  <!-- Page Header -->
+  <div style="background: linear-gradient(135deg, #2E144F 0%, #1a0c30 100%);" class="py-12 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-5">
+      <svg width="100%" height="100%">
+        <defs>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="1" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" />
+      </svg>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="flex items-center gap-2 text-xs text-white/40 mb-3">
+        <a href="/" class="hover:text-white transition-colors">Inicio</a>
+        <span>/</span>
+        <a href="/categorias" class="hover:text-white transition-colors">Catálogo</a>
+        <span>/</span>
+        <span class="text-white">{categoria.nombre}</span>
+      </nav>
+      <h1 class="font-heading text-5xl md:text-6xl text-white uppercase">{categoria.nombre}</h1>
+      <p class="text-white/60 mt-2 text-lg">{categoria.descripcion}</p>
+      <div class="mt-4 flex items-center gap-2">
+        <span class="bg-brand-orange text-white text-sm font-bold px-3 py-1 rounded-full">
+          {categoria.items.length} productos
+        </span>
+        {categoria.items.filter(i => i.descuento?.activo).length > 0 && (
+          <span class="bg-brand-yellow text-neutral-dark text-sm font-bold px-3 py-1 rounded-full">
+            {categoria.items.filter(i => i.descuento?.activo).length} en oferta
+          </span>
+        )}
+      </div>
+    </div>
+  </div>
+
+  <!-- Products section -->
+  <section class="py-10 bg-ui-50 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <CategoryProductGrid
+        client:load
+        categoriaId={categoria.id}
+      />
+    </div>
+  </section>
+</Layout>
