@@ -316,7 +316,7 @@ export default function Navbar() {
             </div>
 
             {/* Search bar (desktop) — right side */}
-            <div className="hidden md:flex w-72 lg:w-96 ml-auto relative">
+            <div className="hidden md:flex w-72 lg:w-96 ml-auto relative z-[51]">
               <div className="flex w-full rounded-full overflow-hidden bg-white shadow-sm">
                 <input
                   ref={searchRef}
@@ -426,7 +426,7 @@ export default function Navbar() {
             </div>
 
             {/* Right icons */}
-            <div className="flex items-center gap-1 md:ml-0">
+            <div className="flex items-center gap-2 ml-auto md:ml-0 relative z-[51]">
               {/* User icon with dropdown */}
               <div className="relative" ref={userMenuRef}>
                 <button

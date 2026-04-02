@@ -160,9 +160,9 @@ export default function HeroSection() {
           animate="center"
           exit="exit"
           transition={{ duration: 0.45, ease: "easeInOut" }}
-          className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-10 sm:py-12 md:py-20 flex items-center min-h-[380px] sm:min-h-[460px] md:min-h-[620px]"
+          className="relative max-w-7xl mx-auto px-12 sm:px-10 md:px-6 lg:px-8 w-full py-10 sm:py-12 md:py-20 flex items-center min-h-[380px] sm:min-h-[460px] md:min-h-[620px]"
         >
-          <div className="grid md:grid-cols-2 gap-8 items-center w-full">
+          <div className="grid sm:grid-cols-2 gap-6 items-center w-full">
             {/* Left: Text */}
             <div>
               <span className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider mb-5">
@@ -211,7 +211,7 @@ export default function HeroSection() {
             </div>
 
             {/* Right: Product image */}
-            <div className="hidden md:flex justify-center">
+            <div className="hidden sm:flex justify-center">
               <div className="relative">
                 <div
                   className="absolute inset-0 blur-2xl rounded-full scale-110 opacity-20"
@@ -229,7 +229,7 @@ export default function HeroSection() {
                   <img
                     src={slide.image}
                     alt={slide.imageLabel}
-                    className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 object-contain drop-shadow-2xl"
+                    className="w-44 h-44 sm:w-52 sm:h-52 md:w-72 md:h-72 lg:w-96 lg:h-96 object-contain drop-shadow-2xl"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = slide.imageFallback;
                     }}
