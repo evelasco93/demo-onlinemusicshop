@@ -142,8 +142,8 @@ export const categorias: Categoria[] = [
           {
             nombre: "Negro",
             colorCode: "#1A1A1A",
-            stock: 0,
-            estado: "agotado",
+            stock: 3,
+            estado: "en_stock",
             imagenes: [
               "https://tagimaguitars.com/cdn/shop/files/ALMACH_BK.jpg?v=1766100258",
               "https://tagimaguitars.com/cdn/shop/files/AM_1.jpg?v=1738962229",

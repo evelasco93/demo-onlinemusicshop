@@ -33,6 +33,7 @@ export default function CategoryProductGrid({ categoriaId }: Props) {
   const [filterStatus, setFilterStatus] = useState<string>("");
   const [filterSale, setFilterSale] = useState(false);
   const [searchQ, setSearchQ] = useState("");
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   const brands = [...new Set(sourceProducts.map((p) => p.marca))].sort();
 
@@ -68,7 +69,7 @@ export default function CategoryProductGrid({ categoriaId }: Props) {
 
   return (
     <div className="flex gap-6">
-      {/* Sidebar filters */}
+      {/* Sidebar filters — desktop only */}
       <aside className="hidden md:block w-56 shrink-0">
         <div className="bg-white rounded-2xl border border-ui-100 p-5 space-y-5 sticky top-24">
           <div>
@@ -208,6 +209,185 @@ export default function CategoryProductGrid({ categoriaId }: Props) {
 
       {/* Product grid */}
       <div className="flex-1 min-w-0">
+        {/* Mobile filter toggle */}
+        <div className="md:hidden mb-4">
+          <div className="flex items-center gap-2 flex-wrap">
+            <button
+              onClick={() => setMobileFiltersOpen(!mobileFiltersOpen)}
+              className="flex items-center gap-2 bg-white border border-ui-100 rounded-xl px-4 py-2 text-sm font-semibold text-neutral-dark shadow-sm"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L13 13.414V19a1 1 0 01-.553.894l-4 2A1 1 0 017 21v-7.586L3.293 6.707A1 1 0 013 6V4z"
+                />
+              </svg>
+              Filtros
+              {hasFilters && (
+                <span className="bg-brand-orange text-white text-xs w-4 h-4 rounded-full flex items-center justify-center font-bold">
+                  !
+                </span>
+              )}
+            </button>
+            {filterBrand && (
+              <span className="flex items-center gap-1 bg-brand-orange/10 text-brand-orange text-xs font-semibold px-3 py-1.5 rounded-full">
+                {filterBrand}
+                <button
+                  onClick={() => setFilterBrand("")}
+                  className="ml-1 hover:opacity-70"
+                >
+                  ×
+                </button>
+              </span>
+            )}
+            {filterStatus && (
+              <span className="flex items-center gap-1 bg-brand-orange/10 text-brand-orange text-xs font-semibold px-3 py-1.5 rounded-full">
+                {filterStatus === "en_stock" ? "En stock" : "Preorden"}
+                <button
+                  onClick={() => setFilterStatus("")}
+                  className="ml-1 hover:opacity-70"
+                >
+                  ×
+                </button>
+              </span>
+            )}
+            {filterSale && (
+              <span className="flex items-center gap-1 bg-brand-yellow/20 text-neutral-dark text-xs font-semibold px-3 py-1.5 rounded-full">
+                En oferta
+                <button
+                  onClick={() => setFilterSale(false)}
+                  className="ml-1 hover:opacity-70"
+                >
+                  ×
+                </button>
+              </span>
+            )}
+          </div>
+
+          <AnimatePresence>
+            {mobileFiltersOpen && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="overflow-hidden"
+              >
+                <div className="mt-3 bg-white rounded-2xl border border-ui-100 p-4 space-y-4">
+                  {/* Search */}
+                  <div>
+                    <label className="text-xs font-bold text-neutral-dark uppercase tracking-wide block mb-1.5">
+                      Buscar
+                    </label>
+                    <input
+                      type="text"
+                      value={searchQ}
+                      onChange={(e) => setSearchQ(e.target.value)}
+                      placeholder="Buscar en esta categoría..."
+                      className="w-full border border-ui-100 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange"
+                    />
+                  </div>
+
+                  {/* Brand */}
+                  <div>
+                    <label className="text-xs font-bold text-neutral-dark uppercase tracking-wide block mb-1.5">
+                      Marca
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      <button
+                        onClick={() => setFilterBrand("")}
+                        className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all ${
+                          filterBrand === ""
+                            ? "bg-brand-orange text-white border-brand-orange"
+                            : "border-ui-100 text-neutral-dark"
+                        }`}
+                      >
+                        Todas
+                      </button>
+                      {brands.map((brand) => (
+                        <button
+                          key={brand}
+                          onClick={() => setFilterBrand(brand)}
+                          className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all ${
+                            filterBrand === brand
+                              ? "bg-brand-orange text-white border-brand-orange"
+                              : "border-ui-100 text-neutral-dark"
+                          }`}
+                        >
+                          {brand}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Status */}
+                  <div>
+                    <label className="text-xs font-bold text-neutral-dark uppercase tracking-wide block mb-1.5">
+                      Disponibilidad
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {[
+                        { value: "", label: "Todos" },
+                        { value: "en_stock", label: "En stock" },
+                        { value: "preorden", label: "Preorden" },
+                      ].map((opt) => (
+                        <button
+                          key={opt.value}
+                          onClick={() => setFilterStatus(opt.value)}
+                          className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all ${
+                            filterStatus === opt.value
+                              ? "bg-brand-orange text-white border-brand-orange"
+                              : "border-ui-100 text-neutral-dark"
+                          }`}
+                        >
+                          {opt.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Sale toggle */}
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={filterSale}
+                      onChange={(e) => setFilterSale(e.target.checked)}
+                      className="accent-brand-orange"
+                    />
+                    <span className="text-sm text-neutral-dark font-medium">
+                      Solo en oferta
+                      <span className="ml-1 bg-brand-yellow text-neutral-dark text-xs font-bold px-1.5 py-0.5 rounded-full">
+                        %
+                      </span>
+                    </span>
+                  </label>
+
+                  {hasFilters && (
+                    <button
+                      onClick={() => {
+                        setFilterBrand("");
+                        setFilterStatus("");
+                        setFilterSale(false);
+                        setSearchQ("");
+                      }}
+                      className="w-full text-xs text-brand-orange underline"
+                    >
+                      Limpiar filtros
+                    </button>
+                  )}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
         {/* Toolbar */}
         <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
           <p className="text-sm text-ui-400">

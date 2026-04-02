@@ -104,7 +104,7 @@ export default function HeroSection() {
 
   return (
     <section
-      className="relative overflow-hidden min-h-[520px] md:min-h-[620px]"
+      className="relative overflow-hidden min-h-[380px] sm:min-h-[460px] md:min-h-[620px]"
       style={{ background: slide.bg }}
     >
       {/* Animated background transition */}
@@ -160,7 +160,7 @@ export default function HeroSection() {
           animate="center"
           exit="exit"
           transition={{ duration: 0.45, ease: "easeInOut" }}
-          className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 md:py-20 flex items-center min-h-[520px] md:min-h-[620px]"
+          className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-10 sm:py-12 md:py-20 flex items-center min-h-[380px] sm:min-h-[460px] md:min-h-[620px]"
         >
           <div className="grid md:grid-cols-2 gap-8 items-center w-full">
             {/* Left: Text */}
@@ -173,7 +173,7 @@ export default function HeroSection() {
                 {slide.badge}
               </span>
 
-              <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl text-white uppercase leading-tight">
+              <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white uppercase leading-tight">
                 {slide.title.map((line, i) =>
                   slide.titleHighlight[i] ? (
                     <span key={i} style={{ color: slide.accentColor }}>
@@ -185,7 +185,7 @@ export default function HeroSection() {
                 )}
               </h1>
 
-              <p className="mt-4 text-white/70 text-lg leading-relaxed max-w-lg">
+              <p className="mt-3 text-white/70 text-sm sm:text-base md:text-lg leading-relaxed max-w-lg">
                 {slide.subtitle}
               </p>
 
@@ -211,7 +211,7 @@ export default function HeroSection() {
             </div>
 
             {/* Right: Product image */}
-            <div className="flex justify-center">
+            <div className="hidden md:flex justify-center">
               <div className="relative">
                 <div
                   className="absolute inset-0 blur-2xl rounded-full scale-110 opacity-20"
