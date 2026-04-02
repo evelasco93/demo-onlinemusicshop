@@ -109,11 +109,10 @@ export default function Navbar() {
     if (searchOpen) searchRef.current?.focus();
   }, [searchOpen]);
 
-  const [currentPath, setCurrentPath] = useState(
-    typeof window !== "undefined" ? window.location.pathname : "",
-  );
+  const [currentPath, setCurrentPath] = useState("");
 
   useEffect(() => {
+    setCurrentPath(window.location.pathname);
     const update = () => setCurrentPath(window.location.pathname);
     document.addEventListener("astro:page-load", update);
     return () => document.removeEventListener("astro:page-load", update);
